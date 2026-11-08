@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Эннеаграмма — тест на определение типа личности и инстинктивного подтипа</title>
+<meta name="description" content="Тест на эннеатип с расчётом инстинктивных подтипов (sp/so/sx) и контр-типов. Плюс краткий путеводитель по системе: девять типов, крылья, инстинкты, уровни развития.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='none' stroke='%23c19a49' stroke-width='6'/%3E%3Cpath d='M50 14 L79 90 L21 90 Z' fill='none' stroke='%23c19a49' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root{
+    --ink:#14151c;
+    --ink-soft:#1c1e28;
+    --ink-line:#33364a;
+    --paper:#faf6ee;
+    --paper-soft:#f2ecdb;
+    --paper-card:#ffffff;
+    --line:#e2d9c2;
+    --line-strong:#cfc3a2;
+    --text:#211f1a;
+    --text-soft:#5c5646;
+    --text-faint:#8b8370;
+    --brass:#a97e2f;
+    --brass-light:#c9a24f;
+    --brass-ink:#e8c980;
+    --clay:#9c4a34;
+    --clay-soft:#f4e3da;
+    --sp:#3f6b57;
+    --sp-soft:#e4ede8;
+    --so:#33547f;
+    --so-soft:#e3e9f1;
+    --sx:#9c4a34;
+    --sx-soft:#f4e3da;
+
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'Source Serif 4', Georgia, serif;
+    --font-ui:'Inter', -apple-system, sans-serif;
+
+    --radius-sm:3px;
+    --radius-md:6px;
+    --radius-lg:10px;
+    --container:920px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--brass-ink); color:var(--ink);}
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+  button{font-family:inherit; cursor:pointer;}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);}
+
+  :focus-visible{
+    outline:2px solid var(--brass);
+    outline-offset:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  .wrap{max-width:var(--container); margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:var(--font-ui); font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  }
+
+  h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; margin:0; color:var(--text);}
+  p{margin:0;}
+
+  /* ============ NAV ============ */
+  .site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,21,28,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--ink-line);
+  }
+  .site-nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--font-display); font-weight:600; font-size:18px;
+    color:var(--paper); text-decoration:none; letter-spacing:.01em;
+  }
+  .brand svg{width:22px; height:22px;}
+  .brand em{font-style:normal; color:var(--brass-ink);}
+  .nav-links{
+    display:flex; align-items:center; gap:28px;
+    font-family:var(--font-ui); font-size:13.5px; font-weight:500;
+    list-style:none; margin:0; padding:0;
+  }
+  .nav-links a{
+    color:#c7c8d4; text-decoration:none; padding:6px 0; border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .nav-links a:hover{color:var(--paper); border-color:var(--brass-ink);}
+  .nav-cta{
+    font-family:var(--font-ui); font-weight:600; font-size:13px;
+    background:var(--brass-ink); color:var(--ink); padding:9px 18px;
+    border-radius:2px; text-decoration:none; letter-spacing:.02em;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .nav-cta:hover{background:#f3d99a; transform:translateY(-1px);}
+  .nav-toggle{display:none;}
+
+  /* ============ HERO ============ */
+  .hero{
+    background:
+      radial-gradient(ellipse 900px 500px at 78% -10%, rgba(169,126,47,.18), transparent 60%),
+      var(--ink);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--ink-line);
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center;
+    padding-top:76px; padding-bottom:76px; min-height:560px;
+  }
+  .hero-eyebrow{color:var(--brass-ink); margin-bottom:18px; display:block;}
+  .hero h1{
+    font-size:clamp(42px, 6.4vw, 74px); line-height:.98; color:var(--paper);
+    margin-bottom:22px; letter-spacing:-.01em;
+  }
+  .hero h1 i{font-style:italic; color:var(--brass-ink); font-weight:500;}
+  .hero-lede{
+    font-family:var(--font-body); font-size:18px; line-height:1.65;
+    color:#d6d6de; max-width:46ch; margin-bottom:32px;
+  }
+  .hero-actions{display:flex; align-items:center; gap:22px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-ui); font-weight:600; font-size:14.5px;
+    padding:14px 26px; border-radius:2px; border:1px solid transparent;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .btn-brass{background:var(--brass-ink); color:var(--ink);}
+  .btn-brass:hover{background:#f3d99a; transform:translateY(-1px);}
+  .btn-ghost-dark{color:var(--paper); border-color:#4c4f63; background:transparent;}
+  .btn-ghost-dark:hover{border-color:var(--brass-ink); color:var(--brass-ink);}
+  .btn-ink{background:var(--ink); color:var(--paper);}
+  .btn-ink:hover{background:#24263380; opacity:.9; transform:translateY(-1px);}
+  .btn-outline{border-color:var(--line-strong); color:var(--text); background:transparent;}
+  .btn-outline:hover{border-color:var(--brass); color:var(--brass);}
+  .btn-block{width:100%; justify-content:center;}
+
+  .hero-figure{position:relative; display:flex; align-items:center; justify-content:center;}
+  .enneagram-svg{width:100%; max-width:420px;}
+  .e-circle,.e-triangle,.e-hexagram{
+    fill:none; stroke-linejoin:round; stroke-linecap:round;
+  }
+  .e-circle{stroke:#565a72; stroke-width:1.4; pathLength:1; stroke-dasharray:1; stroke-dashoffset:1; animation:draw 1.8s ease forwards;}
+  .e-triangle{stroke:var(--clay); opacity:.85; stroke-width:1.6; pathLength:1; stroke-dasharray:1; stroke-dashoffset:1; animation:draw 1.6s .35s ease forwards;}
+  .e-hexagram{stroke:var(--brass-ink); stroke-width:1.6; pathLength:1; stroke-dasharray:1; stroke-dashoffset:1; animation:draw 2.1s .75s ease forwards;}
+  .e-points circle{fill:var(--paper);}
+  .e-points{opacity:0; animation:fadein .8s 2.1s ease forwards;}
+  .e-labels{font-family:var(--font-ui); font-size:13px; fill:#9a9cb0; opacity:0; animation:fadein .8s 2.3s ease forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadein{to{opacity:1;}}
+
+  @media (max-width: 860px){
+    .site-nav .nav-links{display:none;}
+    .hero .wrap{grid-template-columns:1fr; padding-top:52px; padding-bottom:44px; min-height:auto;}
+    .hero-figure{order:-1; max-width:280px; margin:0 auto 8px;}
+  }
+
+  /* ============ SECTIONS (generic) ============ */
+  section{padding:88px 0;}
+  section.tight{padding:64px 0;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head .eyebrow{color:var(--brass); display:block; margin-bottom:12px;}
+  .section-head h2{font-size:clamp(28px,3.6vw,38px); margin-bottom:16px; line-height:1.08;}
+  .section-head p{font-size:16.5px; color:var(--text-soft); max-width:56ch;}
+  .divider{
+    border:none; height:1px; background:var(--line); margin:0;
+  }
+
+  /* ============ ABOUT ============ */
+  #about{background:var(--paper);}
+  .about-grid{
+    display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:start;
+  }
+  .about-lede p{font-size:17px; color:var(--text-soft); margin-bottom:16px;}
+  .about-lede p:last-child{margin-bottom:0;}
+  .mechanics{display:grid; gap:22px;}
+  .mechanic-item{
+    display:grid; grid-template-columns:auto 1fr; gap:16px; padding-bottom:22px;
+    border-bottom:1px solid var(--line);
+  }
+  .mechanic-item:last-child{border-bottom:none; padding-bottom:0;}
+  .mechanic-tag{
+    font-family:var(--font-display); font-style:italic; font-weight:500; font-size:15px;
+    color:var(--brass); white-space:nowrap; padding-top:1px;
+  }
+  .mechanic-item h4{font-size:16.5px; margin-bottom:6px;}
+  .mechanic-item p{font-size:15px; color:var(--text-soft);}
+
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr; gap:36px;}
+  }
+
+  /* ============ TYPES GRID ============ */
+  #types{background:var(--paper-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .types-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .type-card{
+    background:var(--paper-card); padding:28px 26px; min-height:220px;
+    display:flex; flex-direction:column;
+  }
+  .type-num{
+    font-family:var(--font-display); font-size:34px; color:var(--line-strong);
+    line-height:1; margin-bottom:14px; font-weight:600;
+  }
+  .type-card h3{font-size:18px; margin-bottom:2px;}
+  .type-card .type-title{
+    font-family:var(--font-ui); font-size:12px; color:var(--brass); font-weight:600;
+    letter-spacing:.03em; margin-bottom:12px; display:block;
+  }
+  .type-card p{font-size:14.5px; color:var(--text-soft); margin-bottom:auto;}
+  .type-fear{
+    margin-top:16px; padding-top:14px; border-top:1px dashed var(--line);
+    font-family:var(--font-ui); font-size:12px; color:var(--text-faint); line-height:1.5;
+  }
+  .type-fear b{color:var(--text-soft); font-weight:600;}
+
+  @media (max-width:860px){
+    .types-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .types-grid{grid-template-columns:1fr;}
+  }
+
+  /* ============ INSTINCTS ============ */
+  #instincts{background:var(--paper);}
+  .instinct-explain-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:36px;}
+  .instinct-explain-card{
+    padding:24px; border:1px solid var(--line); border-radius:var(--radius-md);
+    border-top:3px solid var(--c);
+  }
+  .instinct-explain-card.sp{--c:var(--sp);}
+  .instinct-explain-card.so{--c:var(--so);}
+  .instinct-explain-card.sx{--c:var(--sx);}
+  .instinct-explain-card .instinct-code{
+    font-family:var(--font-ui); font-weight:700; font-size:12px; letter-spacing:.06em;
+    color:var(--c); text-transform:uppercase; margin-bottom:8px; display:block;
+  }
+  .instinct-explain-card h4{font-size:16.5px; margin-bottom:8px;}
+  .instinct-explain-card p{font-size:14px; color:var(--text-soft); line-height:1.55;}
+  .countertype-note{
+    background:var(--clay-soft); border:1px solid #e6c3b3; border-radius:var(--radius-md);
+    padding:20px 24px; font-size:14.5px; color:#5c3323; line-height:1.6;
+  }
+  .countertype-note b{color:var(--clay);}
+
+  @media (max-width:760px){
+    .instinct-explain-grid{grid-template-columns:1fr;}
+  }
+
+  /* ============ TEST SECTION ============ */
+  #test{background:var(--ink); color:var(--paper); border-top:1px solid var(--ink-line);}
+  #test .section-head .eyebrow{color:var(--brass-ink);}
+  #test .section-head h2{color:var(--paper);}
+  #test .section-head p{color:#c7c8d4;}
+
+  .panel{
+    background:var(--paper-card); color:var(--text);
+    border-radius:var(--radius-lg); padding:36px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.45);
+  }
+  @media (max-width:640px){ .panel{padding:24px;} }
+
+  .disclaimer{
+    background:var(--clay-soft); border-left:3px solid var(--clay);
+    padding:16px 20px; border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+    display:flex; gap:14px; margin:26px 0;
+  }
+  .disclaimer .mark{font-size:20px; line-height:1; flex-shrink:0;}
+  .disclaimer h5{
+    font-family:var(--font-ui); font-size:12.5px; font-weight:700; color:#7a3420;
+    text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px;
+  }
+  .disclaimer p{font-size:13.5px; color:#6b3a26; line-height:1.55;}
+
+  .feature-list{list-style:none; margin:22px 0 0; padding:0; display:grid; gap:10px;}
+  .feature-list li{
+    display:flex; gap:10px; font-size:14.5px; color:var(--text-soft); align-items:flex-start;
+  }
+  .feature-list li .check{color:var(--sp); font-weight:700; flex-shrink:0;}
+  .feature-list li b{color:var(--text);}
+
+  .mode-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px;}
+  .mode-card{
+    text-align:left; padding:22px; border-radius:var(--radius-md); border:1.5px solid var(--line-strong);
+    background:var(--paper); transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  .mode-card:hover{border-color:var(--brass); transform:translateY(-2px);}
+  .mode-card.primary{background:var(--ink); border-color:var(--ink); color:var(--paper);}
+  .mode-card.primary:hover{border-color:var(--brass-ink);}
+  .mode-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:8px;}
+  .mode-name{font-family:var(--font-ui); font-weight:700; font-size:14.5px;}
+  .mode-pill{
+    font-family:var(--font-ui); font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px;
+    background:var(--paper-soft); color:var(--text-soft); white-space:nowrap;
+  }
+  .mode-card.primary .mode-pill{background:#2a2c3a; color:var(--brass-ink);}
+  .mode-desc{font-size:13.5px; color:var(--text-soft);}
+  .mode-card.primary .mode-desc{color:#c7c8d4;}
+  .mode-card.titan{grid-column:1/-1; background:linear-gradient(135deg,#2a1d12,var(--ink)); border-color:var(--brass); color:var(--paper);}
+  .mode-card.titan:hover{border-color:var(--brass-ink);}
+  .mode-card.titan .mode-pill{background:var(--brass-ink); color:var(--ink);}
+  .mode-card.titan .mode-desc{color:#d6d6de;}
+  @media (max-width:560px){ .mode-grid{grid-template-columns:1fr;} }
+
+  /* Quiz progress */
+  .quiz-meta{display:flex; justify-content:space-between; align-items:center; font-family:var(--font-ui); font-size:12.5px; color:#c7c8d4; margin-bottom:10px;}
+  .progress-track{width:100%; height:3px; background:#33364a; border-radius:2px; overflow:hidden; margin-bottom:28px;}
+  .progress-fill{height:100%; background:var(--brass-ink); width:0%; transition:width .4s ease;}
+
+  .question-theme{
+    font-family:var(--font-ui); font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--brass); display:block; margin-bottom:12px;
+  }
+  .question-text{font-size:clamp(19px,2.6vw,24px); line-height:1.35; margin-bottom:28px;}
+
+  .option-btn{
+    width:100%; text-align:left; padding:16px 18px; border:1.5px solid var(--line);
+    border-radius:var(--radius-md); background:var(--paper); margin-bottom:10px;
+    display:flex; justify-content:space-between; align-items:center; gap:14px;
+    font-family:var(--font-body); font-size:15px; color:var(--text);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .option-btn:hover{border-color:var(--brass); background:#fff8ea;}
+  .option-tag{
+    font-family:var(--font-ui); font-size:11px; font-weight:700; color:var(--text-faint);
+    background:var(--paper-soft); padding:4px 9px; border-radius:20px; flex-shrink:0;
+  }
+  .option-btn:hover .option-tag{background:var(--brass-ink); color:var(--ink);}
+
+  .back-nav{margin-top:6px;}
+  .back-btn{
+    font-family:var(--font-ui); font-size:12.5px; color:#8f92a8; background:none; border:none; padding:4px 0;
+  }
+  .back-btn:hover{color:var(--brass-ink);}
+  .back-btn.invisible{visibility:hidden;}
+
+  /* ============ RESULTS ============ */
+  .results-intro{text-align:center; margin-bottom:8px;}
+  .results-intro .mark{font-size:38px; display:block; margin-bottom:14px;}
+  .results-intro p{color:#c7c8d4; font-size:14.5px; max-width:46ch; margin:10px auto 0;}
+
+  .result-row{
+    padding:16px 18px; border-radius:var(--radius-md); border:1px solid var(--line); margin-bottom:10px;
+  }
+  .result-row.winner{
+    background:#fff8ea; border-color:var(--brass-light); box-shadow:0 4px 14px -6px rgba(169,126,47,.35);
+  }
+  .result-top{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;}
+  .result-label{font-family:var(--font-ui); font-size:14.5px; color:var(--text-soft);}
+  .result-label.winner-label{color:var(--text); font-weight:700;}
+  .result-pct{font-family:var(--font-display); font-weight:600; font-size:17px;}
+  .result-track{width:100%; height:6px; background:var(--paper-soft); border-radius:6px; overflow:hidden;}
+  .result-fill{height:100%; border-radius:6px; background:var(--text-faint);}
+  .result-fill.winner-fill{background:var(--brass);}
+  .result-sub{
+    display:flex; justify-content:space-between; align-items:center; margin-top:8px;
+    font-family:var(--font-ui); font-size:12px; color:var(--text-faint); gap:10px; flex-wrap:wrap;
+  }
+  .result-sub a, .result-sub button.link{
+    background:none; border:none; color:var(--brass); font-weight:600; font-size:11.5px;
+    text-decoration:underline; font-family:var(--font-ui);
+  }
+
+  /* Accordion */
+  .accordion{border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; margin-bottom:12px; scroll-margin-top:90px;}
+  .accordion-header{
+    width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:16px 18px; background:var(--paper-soft); border:none; text-align:left;
+  }
+  .acc-title{display:flex; flex-direction:column; gap:2px;}
+  .acc-title .name{
+    font-family:var(--font-ui); font-weight:700; font-size:14.5px; display:flex; align-items:center; gap:8px;
+  }
+  .acc-title .pct{font-size:11.5px; background:var(--brass-ink); color:var(--ink); padding:2px 8px; border-radius:20px; font-weight:700;}
+  .acc-title .subtitle{font-size:12px; color:var(--brass); font-weight:600;}
+  .acc-mini{
+    font-family:var(--font-ui); font-size:11px; display:flex; gap:8px; background:var(--paper-card);
+    border:1px solid var(--line); padding:5px 10px; border-radius:20px; color:var(--text-soft);
+  }
+  .acc-mini b{color:var(--text);}
+  .acc-arrow{color:var(--text-faint); transition:transform .2s ease; flex-shrink:0;}
+  .acc-arrow.open{transform:rotate(180deg);}
+  .accordion-body{padding:22px 20px; border-top:1px solid var(--line); font-size:14px; color:var(--text-soft); line-height:1.65;}
+  .accordion-body.hidden{display:none;}
+
+  .breakdown-box{
+    background:var(--paper-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:18px; margin-bottom:20px;
+  }
+  .breakdown-head{
+    display:flex; justify-content:space-between; align-items:center; font-family:var(--font-ui);
+    font-weight:700; font-size:13px; color:var(--text); margin-bottom:14px; flex-wrap:wrap; gap:6px;
+  }
+  .breakdown-head span.note{font-weight:400; font-size:11px; color:var(--text-faint);}
+  .breakdown-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center;}
+  .breakdown-cell{background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius-sm); padding:10px 6px;}
+  .breakdown-cell .lbl{font-family:var(--font-ui); font-size:10.5px; color:var(--text-faint); margin-bottom:2px;}
+  .breakdown-cell .val{font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--text);}
+  .breakdown-cell .match{font-family:var(--font-ui); font-size:10px; color:var(--text-faint);}
+  .segbar{width:100%; height:10px; border-radius:6px; overflow:hidden; display:flex; margin-top:14px; margin-bottom:8px;}
+  .seg-sp{background:var(--sp);} .seg-so{background:var(--so);} .seg-sx{background:var(--sx);}
+  .seglegend{display:flex; justify-content:space-between; font-family:var(--font-ui); font-size:10.5px; color:var(--text-faint);}
+  .dot{width:7px; height:7px; border-radius:50%; display:inline-block; margin-right:5px;}
+
+  .basics-list{margin-bottom:20px;}
+  .basics-list p{margin-bottom:8px; font-size:14px;}
+  .basics-list b{color:var(--text);}
+
+  .subtype-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  .subtype-card{
+    padding:14px; border-radius:var(--radius-md); border:1px solid var(--line); background:var(--paper-soft);
+  }
+  .subtype-card.counter{border-color:var(--brass-light); background:#fff8ea;}
+  .subtype-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+  .subtype-code{
+    font-family:var(--font-ui); font-weight:700; font-size:12px; background:var(--ink); color:var(--brass-ink);
+    padding:3px 9px; border-radius:4px;
+  }
+  .subtype-share{font-family:var(--font-ui); font-size:12px; font-weight:700; color:var(--text);}
+  .counter-flag{
+    display:inline-block; font-family:var(--font-ui); font-size:10px; font-weight:700; color:#7a5310;
+    background:#f3d99a; padding:2px 7px; border-radius:4px; margin-bottom:8px;
+  }
+  .subtype-name{font-family:var(--font-ui); font-weight:700; font-size:12.5px; color:var(--text); margin-bottom:4px;}
+  .subtype-desc{font-size:12px; line-height:1.5;}
+  @media (max-width:700px){ .subtype-cards{grid-template-columns:1fr;} }
+
+  .note-box{background:var(--paper-soft); border:1px solid var(--line); border-radius:var(--radius-md); padding:16px 18px;}
+  .note-box p.label{
+    font-family:var(--font-ui); font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--brass); margin-bottom:6px;
+  }
+  .note-box p.body{font-size:13.5px; color:var(--text-soft); line-height:1.6;}
+
+  .results-footer{
+    background:var(--paper-soft); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px 30px; margin-top:8px;
+  }
+  .results-footer h4{font-size:16px; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  .results-footer .body p{font-size:14px; color:var(--text-soft); margin-bottom:10px; line-height:1.65;}
+  .results-footer .body p:last-child{margin-bottom:0;}
+  .tag-key{font-weight:700; color:var(--clay); background:var(--clay-soft); padding:1px 6px; border-radius:4px;}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--ink); color:#8f92a8; padding:44px 0 34px; border-top:1px solid var(--ink-line);}
+  footer .wrap{display:flex; flex-direction:column; gap:6px; align-items:center; text-align:center;}
+  footer .foot-brand{font-family:var(--font-display); color:var(--paper); font-size:16px; margin-bottom:8px;}
+  footer p{font-family:var(--font-ui); font-size:12.5px; max-width:60ch;}
+  footer .sources{margin-top:14px; font-size:12px; color:#6c6f85;}
+
+  .hidden{display:none !important;}
+
+  .resume-box{border:1px solid var(--brass);background:var(--paper-soft);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:22px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;font-family:var(--font-ui);font-size:14px}
+  .resume-box .btns{display:flex;gap:10px;flex-wrap:wrap}
+  .back-nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+  .mode-card.titan.infinite{background:var(--paper); border-color:var(--line-strong); color:var(--text);}
+  .mode-card.titan.infinite:hover{border-color:var(--brass);}
+  .mode-card.titan.infinite .mode-pill{background:var(--paper-soft); color:var(--text-soft);}
+  .mode-card.titan.infinite .mode-desc{color:var(--text-soft);}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="44" fill="none" stroke="#c9a24f" stroke-width="5"/><path d="M50 14 L79 90 L21 90 Z" fill="none" stroke="#c9a24f" stroke-width="3"/></svg>
+      Энне<em>аграмма</em>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">Система</a></li>
+      <li><a href="#types">9 типов</a></li>
+      <li><a href="#instincts">Инстинкты</a></li>
+    </ul>
+    <a href="#test" class="nav-cta">Пройти тест</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-text">
+      <span class="eyebrow hero-eyebrow">Символ · психология · самопознание</span>
+      <h1>Девять&nbsp;масок<br>одного&nbsp;<i>«я»</i></h1>
+      <p class="hero-lede">
+        Эннеаграмма описывает девять устойчивых стратегий, которыми психика убегает от главного страха
+        и добивается главного желания. Пройдите тест с расчётом инстинктивных подтипов — и посмотрите,
+        насколько точно система описывает именно вас.
+      </p>
+      <div class="hero-actions">
+        <a href="#test" class="btn btn-brass">Пройти тест →</a>
+        <a href="#about" class="btn btn-ghost-dark">Как это устроено</a>
+      </div>
+    </div>
+    <div class="hero-figure">
+      <svg class="enneagram-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Символ эннеаграммы — круг с девятью точками, треугольником и неправильным шестиугольником">
+        <circle class="e-circle" cx="200" cy="200" r="150" pathLength="1"/>
+        <path class="e-triangle" d="M330,275 L70,275 L200,50 Z" pathLength="1"/>
+        <path class="e-hexagram" d="M296,85 L251,341 L348,174 L104,85 L149,341 L52,174 Z" pathLength="1"/>
+        <g class="e-points">
+          <circle cx="200" cy="50" r="4.5"/><circle cx="296" cy="85" r="4.5"/><circle cx="348" cy="174" r="4.5"/>
+          <circle cx="330" cy="275" r="4.5"/><circle cx="251" cy="341" r="4.5"/><circle cx="149" cy="341" r="4.5"/>
+          <circle cx="70" cy="275" r="4.5"/><circle cx="52" cy="174" r="4.5"/><circle cx="104" cy="85" r="4.5"/>
+        </g>
+        <g class="e-labels" text-anchor="middle" dominant-baseline="middle">
+          <text x="200" y="24">9</text><text x="314" y="65">1</text><text x="373" y="171">2</text>
+          <text x="352" y="291">3</text><text x="259" y="369">4</text><text x="139" y="369">5</text>
+          <text x="46" y="291">6</text><text x="25" y="171">7</text><text x="84" y="65">8</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Немного контекста</span>
+      <h2>Что такое эннеаграмма</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-lede">
+        <p>
+          Сам символ — круг с вписанными треугольником и неправильным шестиугольником — восходит к геометрическим
+          и философским традициям, которые в начале XX века на Запад привёз мистик и учитель Георгий Гурджиев.
+          Как инструмент описания характера его переосмыслили боливийский философ Оскар Ичасо и чилийский психиатр
+          Клаудио Наранхо в 1960–70-х годах, соединив идею с наблюдениями из психиатрии и психоанализа.
+        </p>
+        <p>
+          Широкой аудитории систему позже представили американские авторы Дон Ричард Рисо и Расс Хадсон, а также
+          Хелен Палмер — во многом благодаря их книгам эннеаграмма стала популярным языком для разговора
+          о характере, отношениях и личностном росте, каким мы её знаем сегодня.
+        </p>
+        <p>
+          Важно понимать: это не строгая научная классификация вроде MBTI или Big Five, а скорее описательная
+          карта, выросшая из клинических наблюдений и духовных традиций. Относитесь к ней как к языку для
+          самонаблюдения, а не как к диагнозу.
+        </p>
+      </div>
+      <div class="mechanics">
+        <div class="mechanic-item">
+          <span class="mechanic-tag">Типы</span>
+          <div><h4>Девять базовых стратегий</h4><p>Каждый тип — не набор черт характера, а связка из главного страха и главного желания, вокруг которых строится вся мотивация человека.</p></div>
+        </div>
+        <div class="mechanic-item">
+          <span class="mechanic-tag">Крылья</span>
+          <div><h4>Влияние соседних точек</h4><p>Каждый тип «опирается» на один из двух соседних по кругу типов — это крыло добавляет оттенок к базовому характеру, не меняя его суть.</p></div>
+        </div>
+        <div class="mechanic-item">
+          <span class="mechanic-tag">Инстинкты</span>
+          <div><h4>Три подтипа внутри типа</h4><p>Самосохранение (sp), социальный (so) и интимный (sx) инстинкты по-разному окрашивают один и тот же тип — об этом подробнее ниже.</p></div>
+        </div>
+        <div class="mechanic-item">
+          <span class="mechanic-tag">Уровни</span>
+          <div><h4>Здоровье, а не приговор</h4><p>Рисо и Хадсон описали континуум от здорового к среднему и деструктивному функционированию — один и тот же тип может проявляться очень по-разному.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="types" class="tight">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Путеводитель</span>
+      <h2>Девять типов вкратце</h2>
+      <p>Коротко о сути каждого типа и о том, чего он боится больше всего. Подробный разбор с процентами инстинктов появится после теста.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+  <div class="types-grid">
+    <div class="type-card">
+      <span class="type-num">01</span>
+      <h3>Перфекционист</h3><span class="type-title">Реформатор · Моралист</span>
+      <p>Живёт по внутреннему кодексу правильного и неправильного, стремится улучшать себя и мир.</p>
+      <div class="type-fear"><b>Боится:</b> быть плохим, порочным или неправым.</div>
+    </div>
+    <div class="type-card">
+      <span class="type-num">02</span>
+      <h3>Помощник</h3><span class="type-title">Наставник · Альтруист</span>
+      <p>Настраивается на чужие нужды раньше своих — и обретает значимость через близость.</p>
+      <div class="type-fear"><b>Боится:</b> быть нежеланным и недостойным любви.</div>
+    </div>
+    <div class="type-card">
+      <span class="type-num">03</span>
+      <h3>Достигатель</h3><span class="type-title">Образец для подражания</span>
+      <p>Меряет себя результатом и признанием, умеет становиться тем, кем нужно для успеха.</p>
+      <div class="type-fear"><b>Боится:</b> оказаться никчемным неудачником.</div>
+    </div>
+    <div class="type-card">
+      <span class="type-num">04</span>
+      <h3>Индивидуалист</h3><span class="type-title">Романтик · Эстет</span>
+      <p>Ищет подлинность и глубину чувств, избегает всего обыденного и поверхностного.</p>
+      <div class="type-fear"><b>Боится:</b> остаться без личной значимости.</div>
+    </div>
+    <div class="type-card">
+      <span class="type-num">05</span>
+      <h3>Наблюдатель</h3><span class="type-title">Мыслитель · Исследователь</span>
+      <p>Копит знания и бережёт личные границы, чтобы чувствовать себя компетентным.</p>
+      <div class="type-fear"><b>Боится:</b> быть беспомощным и опустошённым.</div>
+    </div>
+    <div class="type-card">
+      <span class="type-num">06</span>
+      <h3>Лоялист</h3><span class="type-title">Скептик · Защитник</span>
+      <p>Просчитывает риски наперёд и ищет опору — в системе, союзниках или своей стойкости.</p>
+      <div class="type-fear"><b>Боится:</b> остаться без поддержки и защиты.</div>
+    </div>
+    <div class="type-card">
+      <span class="type-num">07</span>
+      <h3>Энтузиаст</h3><span class="type-title">Эпикуреец · Оптимист</span>
+      <p>Держит в голове десяток вариантов будущего, не давая скуке и боли себя догнать.</p>
+      <div class="type-fear"><b>Боится:</b> оказаться в ловушке боли или скуки.</div>
+    </div>
+    <div class="type-card">
+      <span class="type-num">08</span>
+      <h3>Босс</h3><span class="type-title">Лидер · Конфронтатор</span>
+      <p>Берёт ответственность и контроль, не терпит, когда им управляют или видят слабым.</p>
+      <div class="type-fear"><b>Боится:</b> оказаться под чужим контролем.</div>
+    </div>
+    <div class="type-card">
+      <span class="type-num">09</span>
+      <h3>Миротворец</h3><span class="type-title">Посредник · Целитель</span>
+      <p>Растворяется в чужих взглядах ради мира и спокойствия, избегая конфликта любой ценой.</p>
+      <div class="type-fear"><b>Боится:</b> потери связи, конфликта, разлада.</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="instincts">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Второй слой системы</span>
+      <h2>Инстинкты и контр-типы</h2>
+      <p>Помимо номера типа, у каждого человека есть ведущий инстинкт — он определяет, на что в первую очередь направлена энергия типа.</p>
+    </div>
+    <div class="instinct-explain-grid">
+      <div class="instinct-explain-card sp">
+        <span class="instinct-code">sp · самосохранение</span>
+        <h4>Тело, быт, ресурсы</h4>
+        <p>Фокус на физической безопасности: здоровье, дом, деньги, комфорт и стабильный распорядок дня.</p>
+      </div>
+      <div class="instinct-explain-card so">
+        <span class="instinct-code">so · социальный</span>
+        <h4>Группа, статус, роль</h4>
+        <p>Фокус на месте в сообществе: принадлежность к группе, репутация, иерархия и вклад в общее дело.</p>
+      </div>
+      <div class="instinct-explain-card sx">
+        <span class="instinct-code">sx · интимный</span>
+        <h4>Притяжение, интенсивность</h4>
+        <p>Фокус на глубокой связи один на один: химия, страсть, слияние с избранным человеком или идеей.</p>
+      </div>
+    </div>
+    <div class="countertype-note">
+      <b>Контр-типы.</b> У каждого эннеатипа есть один инстинктивный подтип, который выглядит «наоборот» —
+      он не подавляет главную страсть типа явно, а компенсирует её противоположным поведением. Например,
+      сексуальная Шестёрка вместо тревожности демонстрирует бесстрашие. В тесте это обозначено как sx1, sp2,
+      sp3, sp4, sx5, sx6, so7, so8, so9 — если высокий процент выпадает именно на контр-тип, поведение может
+      заметно отличаться от «учебникового» описания вашего эннеатипа.
+    </div>
+  </div>
+</section>
+<section id="test">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Пора проверить на себе</span>
+      <h2>Пройдите тест</h2>
+      <p>Отвечайте так, как вы ведёте себя большую часть жизни — не в момент стресса и не так, как «правильно». Крайности в ответах дают более точный результат, чем осторожная середина.</p>
+    </div>
+
+    <!-- SCREEN 1: START/DISCLAIMER -->
+    <div id="start-screen" class="panel">
+      <div class="disclaimer">
+        <span class="mark">⚠️</span>
+        <div>
+          <h5>Важный дисклеймер</h5>
+          <p>
+            Тест носит ознакомительный и исследовательский характер, это не психодиагностический инструмент
+            и не замена консультации со специалистом. Ни один онлайн-тест не даёт стопроцентной гарантии — отчасти
+            потому, что у каждого типа есть контр-тип, чьё поведение идёт вразрез со стереотипным описанием.
+            Для более глубокого понимания стоит опираться на профильную литературу, например «Мудрость
+            эннеаграммы» Дона Ричарда Рисо и Расса Хадсона, и в идеале обсуждать результат с человеком,
+            хорошо знающим систему.
+          </p>
+        </div>
+      </div>
+
+      <ul class="feature-list">
+        <li><span class="check">✓</span><span><b>Расчёт инстинктов:</b> итоговый процент sp / so / sx внутри каждого типа.</span></li>
+        <li><span class="check">✓</span><span><b>Контр-типы:</b> отдельно отмечены sx1, sp2, sp3, sp4, sx5, sx6, so7, so8, so9.</span></li>
+        <li><span class="check">✓</span><span><b>Случайный порядок:</b> вопросы перемешаны и не привязаны к видимому номеру типа.</span></li>
+      </ul>
+
+      <div id="resume-box" class="resume-box hidden"></div>
+
+      <div class="mode-grid">
+        <button onclick="startTest('short')" class="mode-card">
+          <div class="mode-top"><span class="mode-name">⚡ Экспресс-тест</span><span class="mode-pill">27 вопросов</span></div>
+          <p class="mode-desc">По 3 сбалансированных вопроса на каждый тип, около 5 минут.</p>
+        </button>
+        <button onclick="startTest('extended')" class="mode-card primary">
+          <div class="mode-top"><span class="mode-name">🔬 Расширенный тест</span><span class="mode-pill">81 вопрос</span></div>
+          <p class="mode-desc">Максимальная точность и подробный разбор всех подтипов, около 15 минут.</p>
+        </button>
+        <button onclick="startTest('titan')" class="mode-card titan">
+          <div class="mode-top"><span class="mode-name">🏛️ Титанический тест</span><span class="mode-pill">243 вопроса</span></div>
+          <p class="mode-desc">В три раза больше расширенного: к вопросам о подтипах добавлены страхи, базовые желания, страсти, фиксации ума, защитные механизмы, невротические паттерны, поведение в стрессе, внутренний критик и слепые пятна. Около 45–60 минут.</p>
+        </button>
+        <button onclick="startTest('infinite')" class="mode-card titan infinite">
+          <div class="mode-top"><span class="mode-name">♾️ Бесконечный тест</span><span class="mode-pill">2187 вопросов</span></div>
+          <p class="mode-desc">243 вопроса титанического теста + 1944 дополнительных: 12 граней каждого типа (страх, желание, страсть, фиксация, защита, стресс, рост, внутренний критик, слепое пятно, центр, крыло, добродетель) × 9 сфер жизни × 2 режима (обычно / под давлением). Прогресс сохраняется автоматически; результат можно получить в любой момент после 27 ответов.</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: QUESTIONNAIRE -->
+    <div id="test-screen" class="panel hidden">
+      <div class="quiz-meta">
+        <span id="question-counter">Вопрос 1 из 27</span>
+        <span id="progress-percent">0% заполнено</span>
+      </div>
+      <div class="progress-track"><div id="progress-indicator" class="progress-fill"></div></div>
+
+      <span id="question-theme" class="question-theme">Исследование реакций и мотиваций</span>
+      <h3 id="question-text" class="question-text">Текст вопроса загружается...</h3>
+
+      <div class="options">
+        <button onclick="handleAnswer(4)" class="option-btn"><span>Это абсолютно про меня, точно отражает мои мотивы</span><span class="option-tag">+4</span></button>
+        <button onclick="handleAnswer(3)" class="option-btn"><span>В основном согласен(на), это часто движет мною</span><span class="option-tag">+3</span></button>
+        <button onclick="handleAnswer(2)" class="option-btn"><span>Иногда это так, но не всегда приоритетно</span><span class="option-tag">+2</span></button>
+        <button onclick="handleAnswer(1)" class="option-btn"><span>Редко совпадает с тем, что я чувствую</span><span class="option-tag">+1</span></button>
+        <button onclick="handleAnswer(0)" class="option-btn"><span>Совсем не про меня, это мне чуждо</span><span class="option-tag">0</span></button>
+      </div>
+
+      <div class="back-nav">
+        <button onclick="toMenu()" class="back-btn">☰ В меню (прогресс сохранён)</button>
+        <button onclick="finishTest()" id="finish-btn" class="back-btn hidden">Показать результат сейчас ✓</button>
+        <button onclick="prevQuestion()" id="back-btn" class="back-btn invisible">← Назад к предыдущему вопросу</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: RESULTS -->
+    <div id="results-screen" class="hidden">
+      <div class="panel results-intro" style="margin-bottom:24px;">
+        <span class="mark">📊</span>
+        <h2 style="font-size:26px; margin-bottom:8px;">Ваш профиль эннеаграммы</h2>
+        <p>Нажмите на любой тип ниже, чтобы открыть разбор по процентам инстинктов (sp, so, sx) и описание подтипов.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:24px;">
+        <h3 style="font-size:18px; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid var(--line);">Результаты по типам</h3>
+        <div id="types-bars-container"></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+          <h3 style="font-size:18px;">Подробный разбор инстинктов по типам</h3>
+          <span class="mode-pill" style="background:var(--paper-soft); color:var(--brass);">% sp / so / sx</span>
+        </div>
+        <p style="font-size:13px; color:var(--text-faint); margin-bottom:18px;">Выберите тип, чтобы увидеть точную долю каждого инстинкта, базовый страх и признаки контр-типа.</p>
+        <div id="descriptions-container"></div>
+      </div>
+
+      <div class="results-footer">
+        <h4>📚 Как читать проценты инстинктов</h4>
+        <div class="body">
+          <p>Проценты внутри типа показывают, какой из трёх инстинктов — <b>sp</b> (самосохранение), <b>so</b> (социальный)
+          или <b>sx</b> (интимный) — сильнее всего окрашивает вашу реакцию в рамках этого типа.</p>
+          <p><b>Обратите внимание на контр-типы:</b> высокий процент в <span class="tag-key">sx1</span>, <span class="tag-key">sp2</span>,
+          <span class="tag-key">sp3</span>, <span class="tag-key">sp4</span>, <span class="tag-key">sx5</span>, <span class="tag-key">sx6</span>,
+          <span class="tag-key">so7</span>, <span class="tag-key">so8</span> или <span class="tag-key">so9</span> означает, что поведение
+          может заметно отличаться от классического описания эннеатипа.</p>
+        </div>
+        <div style="padding-top:18px;">
+          <button onclick="restartTest()" class="btn btn-ink btn-block">Пройти тест заново</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="foot-brand">☉ Эннеаграмма</span>
+    <p>Развлекательно-исследовательский проект о девяти типах личности. Результат теста — повод для размышления
+    и самонаблюдения, а не диагноз и не психологическая консультация.</p>
+    <p class="sources">Ориентиры по содержанию: работы Дона Р. Рисо и Расса Хадсона, Клаудио Наранхо, материалы The Enneagram Institute. © 2026</p>
+  </div>
+</footer>
+<script>
+    // Полный набор вопросов, привязанных к типу (1-9) и инстинктивному подтипу ('sp','so','sx')
+    const allQuestions = [
+        // --- ТИП 1: ПЕРФЕКЦИОНИСТ (контр-тип: sx1) ---
+        { id: 1, type: 1, subtype: 'sp', text: "Я часто испытываю внутреннюю тревогу за то, чтобы все бытовые дела и рабочие детали были сделаны абсолютно правильно." },
+        { id: 2, type: 1, subtype: 'sx', text: "Когда окружающие делают ошибки или поступают неверно, я прямо и с пылом указываю им на то, как надо исправиться." },
+        { id: 3, type: 1, subtype: 'so', text: "Мне принципиально важно быть безупречным этическим примером и ориентиром справедливости для общества или коллектива." },
+        { id: 4, type: 1, subtype: 'so', text: "Меня глубоко возмущает, когда люди открыто нарушают общественные нормы, правила и установленные договоренности." },
+        { id: 5, type: 1, subtype: 'sp', text: "Внутри меня постоянно звучит строгое требование к себе быть собранным, аккуратным и сдержанным." },
+        { id: 6, type: 1, subtype: 'sp', text: "Мне трудно расслабиться и позволить себе отдых, пока в окружающем пространстве не наведут полный порядок." },
+        { id: 7, type: 1, subtype: 'sx', text: "Я склонен(на) активно реформировать и перевоспитывать близких людей ради их же собственного блага." },
+        { id: 8, type: 1, subtype: 'sx', text: "Я остро и открыто выражаю свое недовольство, когда сталкиваюсь с некомпетентностью или халатностью." },
+        { id: 9, type: 1, subtype: 'so', text: "Я искренне верю, что общество станет лучше, если каждый начнет строго соблюдать высокие моральные стандарты." },
+
+        // --- ТИП 2: ПОМОЩНИК (контр-тип: sp2) ---
+        { id: 10, type: 2, subtype: 'sx', text: "Я вкладываю невероятную эмоциональную энергию в то, чтобы стать самым важным и любимым человеком для конкретного партнера." },
+        { id: 11, type: 2, subtype: 'so', text: "Я стремительно завоевываю авторитет и влияние в группе, оказывая масштабную поддержку лидерам и участникам." },
+        { id: 12, type: 2, subtype: 'sp', text: "Я часто проявляю мягкость, бессознательно ожидая, что окружающие сами догадаются позаботиться обо мне." },
+        { id: 13, type: 2, subtype: 'sx', text: "Мне легко расположить к себе нужного мне человека через искреннее внимание и комплименты." },
+        { id: 14, type: 2, subtype: 'so', text: "Мне очень важно чувствовать себя центральной и незаменимой фигурой в своем кругу общения или организации." },
+        { id: 15, type: 2, subtype: 'sx', text: "Я готов(а) на глубокую эмоциональную отдачу ради построения пылкой и близкой связи один на один." },
+        { id: 16, type: 2, subtype: 'sp', text: "Мне бывает дискомфортно и тяжело просить о помощи напрямую, хотя я очень в ней нуждаюсь." },
+        { id: 17, type: 2, subtype: 'so', text: "Я легко адаптируюсь к ожиданиям окружающих, чтобы стать для них идеальным и ценным соратником." },
+        { id: 18, type: 2, subtype: 'sp', text: "Я с трудом говорю слово «нет», опасаясь оттолкнуть человека и потерять эмоциональную теплоту." },
+
+        // --- ТИП 3: ДОСТИГАТЕЛЬ (контр-тип: sp3) ---
+        { id: 19, type: 3, subtype: 'so', text: "Для меня критически важно обладать высоким статусом, престижем и признанием моих профессиональных заслуг." },
+        { id: 20, type: 3, subtype: 'so', text: "Я умело выстраиваю свой публичный имидж, чтобы всегда выглядеть успешным и компетентным в глазах общества." },
+        { id: 21, type: 3, subtype: 'sp', text: "Я предпочту молча и качественно сделать работу до идеала, чем громко хвастаться своими успехами." },
+        { id: 22, type: 3, subtype: 'so', text: "Конкуренция и стремление быть первым среди лучших сильно подстегивают мою продуктивность." },
+        { id: 23, type: 3, subtype: 'sp', text: "Я много и упорно работаю, ориентируясь на реальную практическую надежность и материальный результат." },
+        { id: 24, type: 3, subtype: 'sp', text: "Долгий пассивный отдых без дела вызывает у меня ощущение бесполезности и упущенного времени." },
+        { id: 25, type: 3, subtype: 'sx', text: "Я направляю энергию на то, чтобы вдохновлять своего партнера или близкого на высокие достижения." },
+        { id: 26, type: 3, subtype: 'sx', text: "Для меня важно выглядеть максимально привлекательно и гармонично для близкого мне человека." },
+        { id: 27, type: 3, subtype: 'sx', text: "Я умею скрывать свою усталость и проблемы ради поддержания идеального образа перед важными людьми." },
+
+        // --- ТИП 4: ИНДИВИДУАЛИСТ (контр-тип: sp4) ---
+        { id: 28, type: 4, subtype: 'so', text: "Я не боюсь проявлять перед людьми свою ранимость, светлую грусть и переживание своей несхожести с другими." },
+        { id: 29, type: 4, subtype: 'sp', text: "Я привык(ла) молча и стойко переносить жизненные трудности и эмоциональную боль, не жалуясь окружающим." },
+        { id: 30, type: 4, subtype: 'sx', text: "Моя жажда уникальности и страсть иногда проявляются через пылкий вызов, соперничество и экспрессию." },
+        { id: 31, type: 4, subtype: 'so', text: "Я часто чувствую глубокую тоску от того, что окружающий мир кажется слишком поверхностным и банальным." },
+        { id: 32, type: 4, subtype: 'so', text: "Мне важно находить эмоциональное понимание и сочувствие к моим сложным внутренним переживаниям." },
+        { id: 33, type: 4, subtype: 'sp', text: "Доказывая свою уникальность, я готов(а) на выносливость, терпение и лишения ради высшей цели или искусства." },
+        { id: 34, type: 4, subtype: 'sp', text: "Я стараюсь сохранять эстетическую и внутреннюю независимость, даже когда мне тяжело физически или морально." },
+        { id: 35, type: 4, subtype: 'sx', text: "Я могу требовательно и задиристо отстаивать свое право на уникальное видение в отношениях." },
+        { id: 36, type: 4, subtype: 'sx', text: "Мои чувства к близкому человеку невероятно интенсивны, контрастны и полны глубокого драматизма." },
+
+        // --- ТИП 5: НАБЛЮДАТЕЛЬ (контр-тип: sx5) ---
+        { id: 37, type: 5, subtype: 'so', text: "Я ищу фундаментальные знания и люблю обсуждать сложные концепции в кругу проверенных экспертов." },
+        { id: 38, type: 5, subtype: 'sp', text: "Мой дом и личное пространство — это неприкосновенная крепость, где я восстанавливаю силы в абсолютном одиночестве." },
+        { id: 39, type: 5, subtype: 'sx', text: "Несмотря на внешнюю сдержанность, я мечтаю о глубочайшем, романтическом и доверительном слиянии с одним единственным человеком." },
+        { id: 40, type: 5, subtype: 'sp', text: "Я стараюсь экономно расходовать свои жизненные ресурсы: время, силу, энергию и финансы." },
+        { id: 41, type: 5, subtype: 'so', text: "Для меня крайне важно обладать глубокой теоретической компетентностью в интересующих меня сферах." },
+        { id: 42, type: 5, subtype: 'so', text: "Я предпочитаю объективный системный анализ эмоциональным порывам и спонтанным действиям." },
+        { id: 43, type: 5, subtype: 'sp', text: "Вторжение в мои личные границы и навязчивая эмоциональность окружающих быстро истощают меня." },
+        { id: 44, type: 5, subtype: 'sx', text: "Я открываю свой внутренний мир и сокровенные мысли только одному избранному партнеру, которому полностью вверяю доверие." },
+        { id: 45, type: 5, subtype: 'sx', text: "Я ищу в отношениях абсолютную духовную и интеллектуальную близость без поверхностных социальных условностей." },
+
+        // --- ТИП 6: ЛОЯЛИСТ (контр-тип: sx6) ---
+        { id: 46, type: 6, subtype: 'so', text: "Для меня критически важно опираться на понятные правила, проверенные законы и надежные структуры." },
+        { id: 47, type: 6, subtype: 'sp', text: "Я проявляю доброжелательность, мягкость и теплоту к людям, чтобы гарантировать взаимную безопасность." },
+        { id: 48, type: 6, subtype: 'sp', text: "Я постоянно просчитываю потенциальные риски и наихудшие сценарии, чтобы защитить себя и близких." },
+        { id: 49, type: 6, subtype: 'sx', text: "Преодолевая страх, я предпочитаю идти прямо навстречу опасности и открыто бросать ей вызов." },
+        { id: 50, type: 6, subtype: 'so', text: "Я проявляю невероятную преданность и верность организации, идеям или авторитетной команде." },
+        { id: 51, type: 6, subtype: 'so', text: "В ситуациях неопределенности я ищу четкие инструкции, системную поддержку или проверенные руководства." },
+        { id: 52, type: 6, subtype: 'sp', text: "Мне необходимо время, чтобы по-настоящему убедиться в надежности и искренности нового человека." },
+        { id: 53, type: 6, subtype: 'sx', text: "Я демонстрирую внешнюю силу, твердость и независимость, чтобы никто не заподозрил мою уязвимость." },
+        { id: 54, type: 6, subtype: 'sx', text: "Я склонен(на) решительно и остро контратаковать источник угрозы или давления, не дожидаясь удара." },
+
+        // --- ТИП 7: ЭНТУЗИАСТ (контр-тип: so7) ---
+        { id: 55, type: 7, subtype: 'sx', text: "Я легко вдохновляюсь новыми идеями, увлекательными людьми и наделяю будущее сказочными перспективами." },
+        { id: 56, type: 7, subtype: 'sp', text: "Я активно формирую вокруг себя сеть полезных связей и практических возможностей для комфортной жизни." },
+        { id: 57, type: 7, subtype: 'sp', text: "Я стараюсь обеспечить себе постоянный доступ к приятным впечатлениям, избегая рамок и скуки." },
+        { id: 58, type: 7, subtype: 'so', text: "Я готов(а) сознательно ограничивать свои личные хотелки ради блага группы или помощи друзьям." },
+        { id: 59, type: 7, subtype: 'sp', text: "Мне нравится находить практичные, эффективные и нестандартные решения для удовлетворения своих потребностей." },
+        { id: 60, type: 7, subtype: 'so', text: "Я стремлюсь служить общему делу, проявляя альтруизм и заражая всех вокруг позитивным видением." },
+        { id: 61, type: 7, subtype: 'so', text: "Для меня важно быть полезным и щедрым участником коллектива, не выглядя эгоистом." },
+        { id: 62, type: 7, subtype: 'sx', text: "Я обожаю погружаться в новые увлекательные проекты и яркие фантазии, мгновенно переключаясь при угасании интереса." },
+        { id: 63, type: 7, subtype: 'sx', text: "Мой ум постоянно ищет романтическую новизну, неизведанные горизонты и вдохновляющие эксперименты." },
+
+        // --- ТИП 8: БОСС (контр-тип: so8) ---
+        { id: 64, type: 8, subtype: 'sp', text: "Для меня принципиально самостоятельно контролировать свои физические ресурсы, дела и личную территорию." },
+        { id: 65, type: 8, subtype: 'sx', text: "В отношениях я проявляю полную страстность и стремление полностью завоевать внимание и преданность человека." },
+        { id: 66, type: 8, subtype: 'sp', text: "Я действую прямо и прагматично, не расходуя слова впустую, когда нужно отстоять свои интересы." },
+        { id: 67, type: 8, subtype: 'so', text: "Я бескомпромиссно беру на себя роль защитника для слабых, несправедливо обиженных или своей команды." },
+        { id: 68, type: 8, subtype: 'sx', text: "Я не боюсь острых эмоциональных конфликтов и готов(а) открыто отстаивать свою позицию в борьбе." },
+        { id: 69, type: 8, subtype: 'so', text: "Моя сила и решительность направлены на то, чтобы восстанавливать справедливость и вести за собой людей." },
+        { id: 70, type: 8, subtype: 'so', text: "Я чувствую гиперответственность за опеку и безопасность тех, кто доверился моему покровительству." },
+        { id: 71, type: 8, subtype: 'sp', text: "Любые попытки ограничить мою автономность или управлять мною вызывают немедленный жесткий отпор." },
+        { id: 72, type: 8, subtype: 'sx', text: "Я презираю фальшь и требую абсолютной честности, искренности и преданности в личных контактах." },
+
+        // --- ТИП 9: МИРОТВОРЕЦ (контр-тип: so9) ---
+        { id: 73, type: 9, subtype: 'so', text: "Я неутомимо и с энтузиазмом участвую в общественной жизни и делах группы, часто забывая о собственных нуждах." },
+        { id: 74, type: 9, subtype: 'sp', text: "Я нахожу душевный покой и безопасность в привычной домашней рутине, уюте и вкусной еде." },
+        { id: 75, type: 9, subtype: 'sx', text: "Я склонен(на) сильно растворять свое «Я» в партнере, перенимая его увлечения, взгляды и ритм жизни." },
+        { id: 76, type: 9, subtype: 'sp', text: "Я заглушаю стресс и тревогу через простые бытовые занятия, комфорт и сохранение невозмутимого порядка." },
+        { id: 77, type: 9, subtype: 'so', text: "Мне приносит радость быть гармоничной частью коллектива, поддерживая теплый и дружный климат." },
+        { id: 78, type: 9, subtype: 'sx', text: "В близких отношениях я иду на максимум слияния, избегая любых разногласий ради душевного единства." },
+        { id: 79, type: 9, subtype: 'sp', text: "Я склонен(на) откладывать сложные решения, выбирая сохранение текущего удобства и привычного спокойствия." },
+        { id: 80, type: 9, subtype: 'so', text: "Окружающие знают меня как невероятно трудолюбивого, помогающего и сглаживающего любые острые углы человека." },
+        { id: 81, type: 9, subtype: 'sx', text: "Я обретаю внутреннюю гармонию через глубокую связь с близким человеком, сглаживая все шероховатости." }
+    ];
+
+    // --- ТИТАНИЧЕСКИЙ ТЕСТ: 162 дополнительных вопроса (по 18 на тип, 2 на каждую тему) ---
+    // Эти вопросы относятся только к типу (subtype: 'core') и не влияют на расчёт инстинктов.
+    const titanThemes = ['Страхи', 'Базовые желания и мотивы', 'Страсть', 'Фиксация ума', 'Защитные механизмы', 'Невротические паттерны', 'Стресс и дезинтеграция', 'Внутренний критик', 'Слепые пятна'];
+    const titanRaw = `1|Больше всего я боюсь оказаться плохим, неправильным или морально испорченным.
+1|Мне нужно чувствовать, что я честен, добродетелен и ни в чём не виноват.
+1|Внутри копится раздражение, которое я стараюсь не показывать.
+1|Я постоянно замечаю, что вокруг можно было бы сделать лучше.
+1|Недопустимые желания я превращаю в строгость и правильность.
+1|Навязчивые «надо» и списки правил не дают мне спокойно жить.
+1|Под давлением я становлюсь мрачным(ой), унылым(ой) и замыкаюсь в себе.
+1|Внутренний судья разбирает каждый мой промах и не даёт расслабиться.
+1|Мне говорили, что я осуждаю других, хотя сам(а) этого не замечаю.
+1|Мысль, что меня сочтут порочным или виноватым, пугает меня до дрожи.
+1|Мне важно быть уверенным(ой), что мои мотивы чисты, а поступки справедливы.
+1|Я злюсь на себя за малейшее несовершенство сильнее, чем на других.
+1|Меня мучает обида на мир, в котором всё не так, как должно быть.
+1|Чем сильнее мне хочется чего-то «неположенного», тем строже я себя веду.
+1|Я перепроверяю уже сделанное, потому что боюсь пропустить ошибку.
+1|В упадке я начинаю жалеть себя и чувствовать, что меня никто не ценит.
+1|Я редко бываю собой доволен(льна): всегда найдётся, что подтянуть.
+1|Я поздно замечаю, что напряжение в теле — это подавленная злость.
+2|Я очень боюсь оказаться ненужным(ой) и нелюбимым(ой).
+2|Мне важно чувствовать, что меня любят и ценят именно за мою заботу.
+2|Мне приятна мысль, что без меня окружающие просто не справились бы.
+2|Я заранее угадываю, что нужно людям, и подстраиваюсь под их настроение.
+2|Я отодвигаю собственные нужды так далеко, что почти не чувствую их.
+2|Если мне не благодарны, во мне закипают обида и скрытый счёт.
+2|Когда меня долго не ценят, я срываюсь на требования и упрёки.
+2|Внутренний голос твердит, что любовь надо заслужить полезностью.
+2|Я искренне отрицаю, что помогаю ради ответной любви.
+2|Холодность близкого человека ранит меня сильнее любой неудачи.
+2|Мне нужно быть уверенным(ой), что меня выбирают, а не терпят.
+2|Я чувствую себя хорошим человеком именно потому, что отдаю больше других.
+2|Я много думаю о том, как показать людям свою привязанность и расположение.
+2|Когда мне самому(ой) что-то нужно, я сразу переключаюсь на чужие нужды.
+2|Я тревожусь, если не знаю, как человек ко мне относится.
+2|В истощении я могу вдруг стать резким(ой) и напомнить обо всём, что сделал(а).
+2|Если я не помог(ла), то чувствую вину и считаю себя эгоистом.
+2|Мне трудно признать, что я управляю людьми через заботу.
+3|Я боюсь оказаться никем без своих достижений.
+3|Мне нужно чувствовать, что я ценен(на), потому что добился(лась) успеха.
+3|Мне важен блеск: хочется, чтобы мой успех видели и оценили.
+3|Я постоянно прикидываю, какое впечатление произвожу в чужих глазах.
+3|Я так сроднился(лась) с ролью, что порой путаю её с собой настоящим.
+3|Я не могу остановиться: пустое время вызывает тревогу и ощущение провала.
+3|При крахе планов я цепенею, отключаюсь и ничего не хочу делать.
+3|Внутри звучит: «ты стоишь столько, сколько твой результат».
+3|Я привык(ла) говорить то, что нужно, и не всегда помню, что чувствую на самом деле.
+3|Публичная неудача для меня страшнее физической боли.
+3|Я хочу, чтобы меня считали успешным(ой) и достойным восхищения.
+3|Я приукрашиваю факты о себе, а потом сам(а) в них верю.
+3|Я мысленно составляю план, как стать заметнее и эффективнее.
+3|Я подстраиваю образ под аудиторию: с каждой группой я немного другой(ая).
+3|Я боюсь замедлиться: кажется, что тогда придётся встретиться с пустотой.
+3|В кризис я теряю мотивацию и могу часами бессмысленно залипать.
+3|Отдых без пользы вызывает у меня чувство вины.
+3|Я могу месяцами не замечать, чего хочу на самом деле, а не чего «принято».
+4|Я боюсь, что во мне нет ничего подлинного и значимого.
+4|Мне нужно найти и выразить своё уникальное «я».
+4|Я завидую тем, кому, кажется, жить легко и естественно.
+4|Я погружаюсь в меланхолию о том, чего мне не хватает и что потеряно.
+4|Чужую боль и критику я впитываю так глубоко, что они становятся частью меня.
+4|Настроение скачет от глубокой тоски до тихого вдохновения за один день.
+4|В стрессе я цепляюсь за людей и требую, чтобы меня не бросали.
+4|Я считаю, что со мной что-то не так — в отличие от остальных.
+4|Я привязываюсь к страданию и порой не хочу, чтобы оно проходило.
+4|Быть обыкновенным(ой) для меня почти равно небытию.
+4|Я хочу, чтобы меня поняли и увидели таким(ой), какой(ая) я есть.
+4|Чужие удачи оставляют горький привкус: у них есть то, чего не хватает мне.
+4|Я тоскую по недостижимому — далёкому человеку, прошлому, идеалу.
+4|Старые раны я проживаю заново и снова делаю частью своей истории.
+4|Я драматизирую мелочи, потому что обычная жизнь кажется пресной.
+4|Когда мне плохо, я вдруг прилепляюсь к человеку и требую внимания.
+4|Я сравниваю себя с другими и каждый раз проигрываю.
+4|Меня тянет к недоступному, а то, что рядом, быстро разочаровывает.
+5|Я боюсь оказаться беспомощным(ой) и неспособным(ой) справиться с жизнью.
+5|Мне нужно быть компетентным(ой) и понимать, как всё устроено.
+5|Я бережно коплю силы, время и знания, потому что их легко потерять.
+5|Я мысленно отстраняюсь и наблюдаю, вместо того чтобы вовлекаться.
+5|Я разделяю мысли и чувства: эмоции переживаю позже, наедине.
+5|Требования и ожидания других людей ощущаются как вторжение.
+5|В стрессе я становлюсь рассеянным(ой), хаотично хватаюсь за дела и не могу сосредоточиться.
+5|Внутренний голос говорит, что я пока знаю слишком мало, чтобы действовать.
+5|Я замечаю свои чувства лишь задним числом, уже в одиночестве.
+5|Чужие просьбы пугают меня тем, что меня «выжмут» до дна.
+5|Я хочу, чтобы меня оставили в покое и не требовали больше, чем я могу дать.
+5|Мне тяжело делиться своим — временем, деньгами, личным пространством.
+5|Я откладываю участие в жизни, пока не соберу достаточно информации.
+5|Я прячусь в «безопасную» теорию, чтобы не оказаться в центре чувств.
+5|Я заранее планирую, сколько общения выдержу, и боюсь превысить лимит.
+5|Под нагрузкой я хаотично разбрасываюсь и теряю привычную собранность.
+5|Я стыжусь, когда не знаю ответа и не могу сразу найти решение.
+5|Я редко замечаю, как сильно жажду близости, но боюсь её цены.
+6|Я боюсь остаться без поддержки и опоры.
+6|Мне нужно чувствовать себя защищённым(ой) и знать, на кого можно положиться.
+6|Тревога стала моим фоном: я привык(ла) ждать подвоха.
+6|Я прокручиваю в голове, что может пойти не так, и ищу слабые места плана.
+6|Я бессознательно приписываю людям скрытые мотивы и угрозу.
+6|Я колеблюсь между доверием и подозрением к одному и тому же человеку.
+6|В тревоге я вдруг бросаюсь в бешеную работу, лишь бы не думать.
+6|Внутренний скептик не даёт мне поверить, что всё будет хорошо.
+6|Я не замечаю, как часто мои опасения не оправдываются.
+6|Решение без чьей-то уверенности пугает меня возможной катастрофой.
+6|Мне нужно знать, что меня не предадут и правила будут соблюдены.
+6|Я побаиваюсь собственной уверенности, потому что она может подвести.
+6|Я жду сигнала опасности и заранее готовлюсь к худшему.
+6|Свою тревогу я «вижу» в других и воспринимаю как их враждебность.
+6|Я бросаю вызов авторитетам, а потом ищу у них же опору.
+6|В тупике я переключаюсь на гиперактивность и ищу, чем бы заняться.
+6|Мне трудно доверять собственному суждению и решениям.
+6|Я могу вести себя то покорно, то дерзко, не понимая, откуда это.
+7|Я боюсь оказаться запертым(ой) в боли и лишениях.
+7|Мне нужно быть счастливым(ой), довольным(ой) и свободным(ой) в выборе.
+7|Мне всегда хочется ещё: ещё впечатлений, идей, возможностей.
+7|Я строю радужные планы и легко перескакиваю между вариантами.
+7|Любую неприятность я быстро объясняю в выгодном свете.
+7|Скука и пустота вызывают у меня почти физический дискомфорт.
+7|Под напряжением я становлюсь придирчивым(ой), жёстким(ой) и начинаю всех критиковать.
+7|Я стараюсь не думать, что у меня всё плохо, и сразу перехожу к хорошему.
+7|Я редко проживаю грусть до конца: стараюсь отвлечься.
+7|Скованность и обязательства кажутся мне ловушкой.
+7|Я хочу, чтобы жизнь была полна приятных впечатлений и вариантов.
+7|Неприятные чувства я глушу новыми увлечениями и удовольствиями.
+7|Мне нравится планировать будущее и мысленно проживать его заранее.
+7|Я легко нахожу разумные доводы, почему мне «не стоит» страдать.
+7|Когда становится слишком больно, я сразу ищу, чем себя отвлечь.
+7|В перегрузе я вдруг вижу всё несовершенным и раздражаюсь на близких.
+7|Я боюсь, что если остановлюсь и загляну в себя, то увижу что-то тяжёлое.
+7|Я часто бросаю дело на полпути, потому что дальше начинается рутина.
+8|Я боюсь оказаться уязвимым(ой) и во власти других.
+8|Мне нужно сохранять контроль над своей жизнью и защищать своих.
+8|Я проживаю всё на максимуме — гнев, желания, усилия.
+8|Я воспринимаю мир как поле борьбы, где выживает сильнейший.
+8|Я отрицаю слабость и боль, будто их нет вовсе.
+8|Я проверяю людей на прочность, чтобы понять, можно ли им доверять.
+8|После срыва я могу замкнуться и надолго отгородиться от всех.
+8|Внутри звучит: «слабость — это то, за что тебя сломают».
+8|Я часто не замечаю, как мой напор пугает окружающих.
+8|Подчиняться чужой воле для меня почти невыносимо.
+8|Я хочу, чтобы со мной считались и мою территорию не трогали.
+8|Если меня задели, я не успокоюсь, пока не восстановлю справедливость.
+8|Я смотрю на людей через призму силы: кто здесь сильный, а кто слабый.
+8|Когда мне больно, я быстро отмахиваюсь и иду дальше, как ни в чём не бывало.
+8|Я не умею просить: попросить значит показать нужду.
+8|Под давлением я отдаляюсь, молча ухожу в себя и перестаю общаться.
+8|Мне стыдно за нежность и потребность в тепле, я быстро их прячу.
+8|Я не замечаю, что за моей бронёй прячется ранимый ребёнок.
+9|Я боюсь разлада, конфликта и потери связи с важными людьми.
+9|Мне нужно внутреннее спокойствие и мир с окружающими.
+9|Я привык(ла) «засыпать» к собственным нуждам, лишь бы не нарушать покой.
+9|Я занимаюсь мелочами, откладывая действительно важное.
+9|Я притупляю напряжение рутиной, едой, сериалами или сном.
+9|Я киваю и соглашаюсь, хотя внутри не согласен(на).
+9|В стрессе я начинаю тревожиться, сомневаться и подозревать худшее.
+9|Мои желания кажутся мне менее значимыми, чем чужие.
+9|Мне трудно сказать, чего я на самом деле хочу.
+9|Мысль о ссоре или разрыве вызывает у меня почти физическое напряжение.
+9|Я хочу, чтобы всё шло своим ходом и никто меня не торопил.
+9|Я легко растворяюсь в чужих планах и забываю о своих.
+9|Я нахожу тысячу занятий, лишь бы не заниматься своим главным делом.
+9|Когда назревает конфликт, я «отключаюсь» и мысленно ухожу.
+9|Я упрямлюсь пассивно: молча не делаю того, о чём просят.
+9|Под давлением я становлюсь нервным(ой) и колеблюсь между «за» и «против».
+9|Я принижаю свою значимость: мол, моё мнение не так уж важно.
+9|Я не замечаю, как мало меня остаётся в собственных решениях.`;
+    const titanCounters = {};
+    const titanQuestions = titanRaw.split('\n').map((line, k) => {
+        const parts = line.split('|');
+        const type = +parts[0];
+        const n = titanCounters[type] = (titanCounters[type] || 0);
+        titanCounters[type]++;
+        return { id: 82 + k, type: type, subtype: 'core', theme: titanThemes[n % 9], text: parts.slice(1).join('|') };
+    });
+
+    // --- БЕСКОНЕЧНЫЙ ТЕСТ: +1944 вопроса = 9 типов × 12 граней × 9 сфер жизни × 2 режима (243 + 1944 = 2187) ---
+    const infFacets = 'Страх|Желание|Страсть|Фиксация ума|Защита|Стресс|Рост|Внутренний критик|Слепое пятно|Центр|Крыло|Добродетель'.split('|');
+    const infCtx = { sp: ['здоровье и быт', 'деньги и безопасность', 'дом и уют'], so: ['работа и коллектив', 'друзья и компании', 'статус и репутация'], sx: ['близкие отношения', 'страсть и притяжение', 'конфликты с близкими'] };
+    const infClauses = {
+        1: 'боюсь допустить ошибку и оказаться плохим|хочу быть уверенным, что поступаю правильно|коплю скрытую злость и сглаживаю её правильностью|ищу, что тут не так и как это исправить|подменяю собственные порывы долгом|мрачнею, замыкаюсь и впадаю в уныние|позволяю себе расслабиться и радоваться без повода|слышу внутреннего судью, оценивающего каждый шаг|не замечаю, как моя прямота ранит других|держу тело в напряжении: сжимаю челюсти и плечи|то горячо опекаю и поучаю, то отстранённо ухожу в покой|принимаю несовершенство как часть жизни',
+        2: 'боюсь оказаться ненужным и нелюбимым|хочу чувствовать, что меня любят за заботу|горжусь, что без моей помощи не обойтись|угадываю, чего другим не хватает и чем помочь|отодвигаю свои нужды и выдвигаю вперёд чужие|срываюсь упрёками и требую благодарности|открыто признаю свои потребности и прошу о них|слышу голос, что любовь нужно заслужить помощью|не замечаю, как опека превращается в давление|чувствую настроение других раньше, чем своё|то заботливо следую долгу, то блистаю обаянием ради симпатии|помогаю смиренно, не ожидая отдачи',
+        3: 'боюсь оказаться никчёмным без достижений|хочу, чтобы мной восхищались и считали успешным|подгоняю свой образ под ожидания, чтобы выглядеть успешным|прикидываю, как это обернётся к моему успеху|отключаю чувства и ухожу в дело|замираю, откладываю дела и теряю интерес|становлюсь настоящим и честно делюсь, а не играю роль|слышу внутренний счёт: ты стоишь столько, сколько достигнешь|не замечаю, как выдаю желаемое за действительное|живу в ритме задач, заглушая сердце|то помогаю ради признания, то тонко переживаю свою особость|учусь быть правдивым и ценить себя без регалий',
+        4: 'боюсь не иметь собственной идентичности и значимости|хочу найти себя и быть по-настоящему понятым|завидую тем, у кого есть то, чего мне не хватает|фокусируюсь на том, чего мне недостаёт|превращаю боль в творчество и красивые переживания|цепляюсь за людей и требую внимания|берусь за дело спокойно и последовательно, не дожидаясь вдохновения|слышу голос, что со мной что-то не так, как у других|не замечаю, как драматизирую простые вещи|живу настроениями, которые определяют мой день|то рвусь к признанию и эффектности, то ухожу в одиночество и размышления|принимаю обыденность и сохраняю ровное равновесие чувств',
+        5: 'боюсь оказаться беспомощным и истощённым|хочу быть знающим и компетентным|бережно коплю время, силы и личное пространство|собираю информацию, прежде чем решиться на действие|отделяю мысли от чувств и прячусь за наблюдением|становлюсь импульсивным и несобранным, ища стимулов|решаюсь выйти из укрытия и действовать уверенно|слышу голос: пока не знаешь достаточно, не лезь|не замечаю, как знание подменяет мне живое участие|живу в голове, а о теле вспоминаю, лишь когда оно напомнит|то ищу надёжные ориентиры и сомневаюсь, то погружаюсь в творческое одиночество|учусь открываться и делиться тем, что знаю',
+        6: 'боюсь остаться без опоры и поддержки|хочу обрести безопасность и уверенность|тревожусь и высматриваю, что может пойти не так|ищу подвох и перебираю худшие сценарии|приписываю другим скрытые намерения и перепроверяю их|становлюсь суетливым трудоголиком, отгоняя тревогу|доверяю себе и иду вперёд, несмотря на сомнения|слышу голос сомнения: а вдруг ты ошибаешься|не замечаю, как сомнения парализуют мои решения|чувствую, как тревога живёт сразу в голове и теле|то отстранённо анализирую, ища уверенность в знаниях, то шучу и ищу лёгкости|действую мужественно, не дожидаясь гарантий',
+        7: 'боюсь боли, скуки и ограничений|хочу быть счастливым и ни в чём не нуждаться|жажду новых впечатлений и всегда хочу ещё|строю радужные планы и перескакиваю между вариантами|перевожу тяжёлое в шутку и рационализирую неприятное|становлюсь придирчивым и жёстким к себе и другим|остаюсь с тем, что есть, и углубляюсь в одно дело|слышу голос: не упускай шанс, вдруг найдётся лучше|не замечаю, как бегство от скуки лишает меня глубины|держу энергию в голове и подпитываю её идеями|то осторожно подстраховываюсь, ища единомышленников, то напористо добиваюсь своего|ценю простое и не гонюсь за новым',
+        8: 'боюсь оказаться слабым и подчинённым|хочу защитить себя и своих и быть хозяином положения|действую напористо и не терплю ограничений|делю мир на сильных и слабых, друзей и врагов|отрицаю слабость и уязвимость и иду напролом|замыкаюсь и скрываю усталость|проявляю нежность и заботу о слабых|слышу голос: покажешь слабость — тебя сомнут|не замечаю, как мой напор подавляет людей|действую телом и инстинктом раньше, чем успеваю подумать|то разряжаюсь шуткой и азартом, то становлюсь спокойным и неспешным|мягко проявляю силу, не доказывая ничего никому',
+        9: 'боюсь конфликтов и разрыва связи|хочу покоя и гармонии внутри и вокруг|откладываю важное и вязну в лени|заменяю главное мелкими второстепенными делами|растворяюсь в чужих желаниях и отключаюсь от своих|становлюсь тревожным и мнительным|включаюсь в жизнь, обозначаю позицию и действую|слышу голос: твоё мнение не стоит усилий|не замечаю, как избегаю конфликтов ценой своих интересов|живу по инерции и привычке, не чувствуя телесной энергии|то внезапно упрямо стою на своём, то наводя строгий порядок|делаю свой шаг, не дожидаясь, пока всё само рассосётся',
+    };
+    const infiniteQuestions = [];
+    (function () {
+        let id = 244;
+        for (let t = 1; t <= 9; t++) {
+            infClauses[t].split('|').forEach((clause, f) => {
+                ['sp', 'so', 'sx'].forEach(sub => infCtx[sub].forEach(ctx => [0, 1].forEach(m => {
+                    infiniteQuestions.push({ id: id++, type: t, subtype: sub, theme: infFacets[f] + ' · ' + ctx,
+                        text: '\u0412 \u0441\u0444\u0435\u0440\u0435 \u00ab' + ctx + '\u00bb ' + (m ? '\u043f\u043e\u0434 \u0434\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c ' : '') + '\u044f ' + clause + '.' });
+                })));
+            });
+        }
+    })();
+
+    // Метаданные девяти эннеатипов и 27 инстинктивных подтипов (контр-типы: sx1, sp2, sp3, sp4, sx5, sx6, so7, so8, so9)
+    const enneatypesData = {
+        1: {
+            name: "Тип 1: Перфекционист", title: "Реформатор / Моралист",
+            fear: "Быть плохим, порочным, дефектным или неправым.",
+            desire: "Быть честным, правильным и сбалансированным.",
+            motivation: "Стремятся делать всё безупречно, улучшать мир и соответствовать высоким внутренним стандартам.",
+            notes: "Классические Единицы сдерживают гнев внутри, но их контр-тип (sx1) открыто направляет его вовне, реформируя других.",
+            instincts: {
+                sp: { code: "sp1", name: "Самосохранение", title: "Тревожная аккуратность", isCountertype: false, desc: "Направляет гнев на себя через постоянный контроль, беспокойство о правильности выполнения дел и бытовой порядок." },
+                so: { code: "so1", name: "Социальный", title: "Непререкаемый пример", isCountertype: false, desc: "Стремится быть идеальным образцом этичности для общества. Фокусируется на правилах, стандартах и справедливости." },
+                sx: { code: "sx1", name: "Интимный / Сексуальный", title: "Реформирование других", isCountertype: true, desc: "Контр-тип: открыто выражает праведный гнев. Активно перевоспитывает, улучшает и реформирует окружающих людей." }
+            }
+        },
+        2: {
+            name: "Тип 2: Помощник", title: "Наставник / Альтруист",
+            fear: "Быть ненужным, нежелательным или недостойным любви.",
+            desire: "Чувствовать себя любимым и ценным.",
+            motivation: "Стремятся проявлять заботу, помогать и вовлекать людей в тесные эмоциональные связи.",
+            notes: "Классические Двойки открыто и настойчиво опекают людей, но их контр-тип (sp2) выглядит более робким, милым и уязвимым.",
+            instincts: {
+                sp: { code: "sp2", name: "Самосохранение", title: "Мягкость и очарование", isCountertype: true, desc: "Контр-тип: выглядит детским, безнадежно милым и беззащитным, привлекая заботу о себе без навязчивой помощи другим." },
+                so: { code: "so2", name: "Социальный", title: "Амбициозный покровитель", isCountertype: false, desc: "Оказывает стратегическую помощь группам и лидерам, обретая влияние и статус в обществе." },
+                sx: { code: "sx2", name: "Интимный / Сексуальный", title: "Страстное притяжение", isCountertype: false, desc: "Обаятельный и экспрессивный, вкладывает всю энергию в завоевание преданности конкретного избранного человека." }
+            }
+        },
+        3: {
+            name: "Тип 3: Достигатель", title: "Образец для подражания",
+            fear: "Быть никчемным, несостоятельным или неудачником.",
+            desire: "Чувствовать себя ценным, успешным и признанным.",
+            motivation: "Стремятся к высокой продуктивности, статусу, победам и наилучшему впечатлению.",
+            notes: "В отличие от обычных Троек с их ярким самопиаром, их контр-тип (sp3) искренне избегает хвастовства, предпочитая тихо работать.",
+            instincts: {
+                sp: { code: "sp3", name: "Самосохранение", title: "Скромный трудоголик", isCountertype: true, desc: "Контр-тип: избегает открытого хвастовства и демонстративности. Верит, что за человека должна говорить безупречная работа." },
+                so: { code: "so3", name: "Социальный", title: "Престиж и социальный успех", isCountertype: false, desc: "Классическая модель успеха: демонстрирует статус, профессионализм и безупречный публичный имидж." },
+                sx: { code: "sx3", name: "Интимный / Сексуальный", title: "Вдохновитель и спутник", isCountertype: false, desc: "Направляет свои амбиции на то, чтобы поддерживать успех своего партнера, оставаясь для него идеальным и привлекательным." }
+            }
+        },
+        4: {
+            name: "Тип 4: Индивидуалист", title: "Романтик / Эстет",
+            fear: "Не иметь индивидуальности, личной значимости или самобытности.",
+            desire: "Найти себя и обрести подлинный уникальный смысл.",
+            motivation: "Стремятся выразить свою уникальность, быть верными чувствам и избегать банальности.",
+            notes: "Обычные Четверки открыто выражают грусть и боль, но их контр-тип (sp4) молча терпит лишения с улыбкой на лице.",
+            instincts: {
+                sp: { code: "sp4", name: "Самосохранение", title: "Стойкий мученик", isCountertype: true, desc: "Контр-тип: переносит боль и вызовы молча и выносливо. Не жалуется на жизнь, доказывая уникальность через невероятную стойкость." },
+                so: { code: "so4", name: "Социальный", title: "Выражение ранимости", isCountertype: false, desc: "Открыто делится своими глубокими чувствами, грустью и ранимостью, ища искреннего эмоционального сочувствия." },
+                sx: { code: "sx4", name: "Интимный / Сексуальный", title: "Эмоциональный вызов", isCountertype: false, desc: "Экспрессивен и задирист. Превращает затаенную обиду в соперничество, требовательность и яркий вызов окружающим." }
+            }
+        },
+        5: {
+            name: "Тип 5: Наблюдатель", title: "Мыслитель / Исследователь",
+            fear: "Быть беспомощным, некомпетентным или опустошенным.",
+            desire: "Быть компетентным, автономным и глубоко понимающим.",
+            motivation: "Стремятся копить знания, минимизировать потребности и оберегать личные границы.",
+            notes: "Обычные Пятерки эмоционально отстранены, но их контр-тип (sx5) ищет уникальную, романтическую и доверительную близость.",
+            instincts: {
+                sp: { code: "sp5", name: "Самосохранение", title: "Замок и границы", isCountertype: false, desc: "Превращает дом в неприступную крепость. Сводит к минимуму зависимости от внешнего мира и оберегает личное время." },
+                so: { code: "so5", name: "Социальный", title: "Экспертные знания", isCountertype: false, desc: "Ищет фундаментальные концепции и экспертную истину. Общается преимущественно в узком кругу интеллектуалов." },
+                sx: { code: "sx5", name: "Интимный / Сексуальный", title: "Тайное слияние", isCountertype: true, desc: "Контр-тип: ищет глубокую, романтическую и поэтичную связь с одним избранным человеком, полностью открывая ему свой мир." }
+            }
+        },
+        6: {
+            name: "Тип 6: Лоялист", title: "Скептик / Защитник",
+            fear: "Остаться без поддержки, защиты и безопасности.",
+            desire: "Иметь безопасность, надежную опору и проверенные ориентиры.",
+            motivation: "Стремятся предвидеть опасности, проверять лояльность и опираться на надежные системы.",
+            notes: "Вместо того чтобы искать убежище или избегать угроз, контр-тип (sx6) преодолевает страх через открытую конфронтацию и силу.",
+            instincts: {
+                sp: { code: "sp6", name: "Самосохранение", title: "Теплота и альянсы", isCountertype: false, desc: "Снижает тревожность через дружелюбие и мягкость. Создает теплые союзы, показывая свою полную безобидность." },
+                so: { code: "so6", name: "Социальный", title: "Верность долгу и системе", isCountertype: false, desc: "Ищет опору в четких правилах, законах, традициях и авторитетных структурах, строго соблюдая установленный долг." },
+                sx: { code: "sx6", name: "Интимный / Сексуальный", title: "Контрфобный вызов", isCountertype: true, desc: "Контр-тип: преодолевает страх через демонстрацию силы. Транслирует решительность, идя прямо навстречу опасности." }
+            }
+        },
+        7: {
+            name: "Тип 7: Энтузиаст", title: "Эпикуреец / Оптимист",
+            fear: "Быть лишенным возможностей, в ловушке скуки или боли.",
+            desire: "Быть свободным, удовлетворенным и испытывать новое.",
+            motivation: "Стремятся поддерживать высокий тонус, планировать радости и избегать ограничений.",
+            notes: "Обычные Семерки следуют за собственными желаниями, но их контр-тип (so7) сознательно жертвует ими ради блага группы.",
+            instincts: {
+                sp: { code: "sp7", name: "Самосохранение", title: "Полезная сеть", isCountertype: false, desc: "Создает альянсы и дружеские сети для взаимной выгоды. Прагматичен в поиске удобных и интересных решений." },
+                so: { code: "so7", name: "Социальный", title: "Альтруизм и служение", isCountertype: true, desc: "Контр-тип: сознательно ограничивает свои аппетиты ради блага коллектива. Стремится быть полезным и щедрым." },
+                sx: { code: "sx7", name: "Интимный / Сексуальный", title: "Увлеченность и идеализация", isCountertype: false, desc: "Влюбляется в вдохновляющие идеи, людей и фантазии, накладывая яркий идеализированный фильтр на обыденность." }
+            }
+        },
+        8: {
+            name: "Тип 8: Босс", title: "Лидер / Конфронтатор",
+            fear: "Оказаться под контролем, подчинением или проявить слабость.",
+            desire: "Защитить себя, определять свою судьбу и контролировать ситуацию.",
+            motivation: "Стремятся быть сильными, оказывать влияние, противостоять давлению и защищать права.",
+            notes: "Обычные Восьмерки транслируют силу для отстаивания личных интересов, а их контр-тип (so8) направляет ту же мощь на защиту слабых.",
+            instincts: {
+                sp: { code: "sp8", name: "Самосохранение", title: "Автономия и ресурсы", isCountertype: false, desc: "Фокусируется на прямой защите своей территории, семьи и ресурсов. Молчалив, практичен и несгибаем." },
+                so: { code: "so8", name: "Социальный", title: "Защитник слабых", isCountertype: true, desc: "Контр-тип: направляет силу и характер на опеку угнетенных и своей команды, принципиально борясь с несправедливостью." },
+                sx: { code: "sx8", name: "Интимный / Сексуальный", title: "Обладание и экспрессия", isCountertype: false, desc: "Страстный, доминирующий и яркий. Стремится полностью завоевать внимание и преданность близкого человека." }
+            }
+        },
+        9: {
+            name: "Тип 9: Миротворец", title: "Посредник / Целитель",
+            fear: "Потери связи, конфликта, разделения и хаоса.",
+            desire: "Иметь душевный покой, гармонию и стабильность.",
+            motivation: "Стремятся избегать конфликтов, сохранять покой и сглаживать острые углы.",
+            notes: "Обычные Девятки пассивны и неприметны, но их контр-тип (so9) невероятно активен и трудолюбив ради гармонии группы.",
+            instincts: {
+                sp: { code: "sp9", name: "Самосохранение", title: "Уют и привычная рутина", isCountertype: false, desc: "Заглушает стресс привычным уютом, едой и бытовыми занятиями, сохраняя невозмутимый покой в своем мире." },
+                so: { code: "so9", name: "Социальный", title: "Неутомимое участие", isCountertype: true, desc: "Контр-тип: невероятно энергичен в командной работе. Вкладывает силы в коллектив, забывая о собственных нуждах." },
+                sx: { code: "sx9", name: "Интимный / Сексуальный", title: "Слияние с партнером", isCountertype: false, desc: "Растворяет свое «Я» в желаниях и ценностях близкого человека, обретая покой через абсолютное объединение." }
+            }
+        }
+    };
+
+    let currentQuestionIndex = 0;
+    let activeQuestions = [];
+    let answers = [];
+
+    // Тасование Фишера — Йетса
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
+    // Сбалансированный короткий тест: по 1 вопросу 'sp','so','sx' для каждого из 9 типов = 27 вопросов
+    function generateShortQuestions() {
+        let selected = [];
+        for (let typeId = 1; typeId <= 9; typeId++) {
+            ['sp', 'so', 'sx'].forEach(sub => {
+                const subQs = allQuestions.filter(q => q.type === typeId && q.subtype === sub);
+                const randomOne = subQs[Math.floor(Math.random() * subQs.length)];
+                if (randomOne) selected.push(randomOne);
+            });
+        }
+        return shuffleArray(selected);
+    }
+
+    // ---------- Сохранение прогресса и результатов (localStorage) ----------
+    const STORE = 'enneagram-test-state-v1';
+    let mode = 'short';
+    const el = id => document.getElementById(id);
+
+    function saveState(done) {
+        try {
+            localStorage.setItem(STORE, JSON.stringify({
+                mode, order: activeQuestions.map(q => q.id), idx: currentQuestionIndex,
+                scores: activeQuestions.map((q, i) => answers[i] ? answers[i].score : null), done: !!done
+            }));
+        } catch (e) {}
+    }
+    function loadState() { try { return JSON.parse(localStorage.getItem(STORE)); } catch (e) { return null; } }
+    function clearState() { try { localStorage.removeItem(STORE); } catch (e) {} }
+
+    function restoreState(s) {
+        if (!s || !Array.isArray(s.order) || !Array.isArray(s.scores)) return false;
+        const byId = {};
+        [...allQuestions, ...titanQuestions, ...infiniteQuestions].forEach(q => byId[q.id] = q);
+        const qs = s.order.map(id => byId[id]);
+        if (!qs.length || qs.some(q => !q)) return false;
+        activeQuestions = qs; mode = s.mode;
+        currentQuestionIndex = Math.max(0, Math.min(s.idx || 0, qs.length - 1));
+        answers = [];
+        s.scores.forEach((sc, i) => { if (sc !== null && qs[i]) answers[i] = { questionId: qs[i].id, type: qs[i].type, subtype: qs[i].subtype, score: sc }; });
+        return true;
+    }
+
+    function answeredCount() { return answers.filter(Boolean).length; }
+
+    function renderResume() {
+        const box = el('resume-box'), s = loadState();
+        if (!s || !s.order) { box.classList.add('hidden'); return; }
+        const n = s.scores.filter(x => x !== null).length;
+        box.innerHTML = s.done
+            ? `<span>💾 Сохранён результат теста (ответов: ${n} из ${s.order.length})</span><span class="btns"><button class="btn btn-ink" onclick="resumeSaved()">Открыть результаты</button><button class="btn btn-outline" onclick="discardSaved()">Удалить</button></span>`
+            : `<span>💾 Незавершённый тест: отвечено ${n} из ${s.order.length}</span><span class="btns"><button class="btn btn-ink" onclick="resumeSaved()">Продолжить</button><button class="btn btn-outline" onclick="discardSaved()">Удалить</button></span>`;
+        box.classList.remove('hidden');
+    }
+    function resumeSaved() {
+        const s = loadState();
+        if (!restoreState(s)) { discardSaved(); return; }
+        s.done ? showSavedResults() : openTest();
+    }
+    function discardSaved() { clearState(); renderResume(); }
+    function showSavedResults() {
+        el('start-screen').classList.add('hidden'); el('test-screen').classList.add('hidden');
+        calculateAndShowResults();
+    }
+
+    function startTest(m = 'short') {
+        mode = m;
+        if (m === 'short') activeQuestions = generateShortQuestions();
+        else if (m === 'infinite') activeQuestions = shuffleArray([...allQuestions, ...titanQuestions, ...infiniteQuestions]);
+        else if (m === 'titan') activeQuestions = shuffleArray([...allQuestions, ...titanQuestions]);
+        else activeQuestions = shuffleArray(allQuestions);
+        currentQuestionIndex = 0;
+        answers = [];
+        saveState();
+        openTest();
+    }
+
+    function openTest() {
+        el('start-screen').classList.add('hidden');
+        el('results-screen').classList.add('hidden');
+        el('test-screen').classList.remove('hidden');
+        showQuestion();
+        el('test-screen').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function toMenu() {
+        saveState();
+        el('test-screen').classList.add('hidden');
+        el('start-screen').classList.remove('hidden');
+        renderResume();
+        el('test').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showQuestion() {
+        const question = activeQuestions[currentQuestionIndex];
+        el('question-counter').innerText = `Вопрос ${currentQuestionIndex + 1} из ${activeQuestions.length}`;
+        const percent = Math.round((currentQuestionIndex / activeQuestions.length) * 100);
+        el('progress-percent').innerText = `${percent}% заполнено`;
+        el('progress-indicator').style.width = `${percent}%`;
+        el('question-theme').innerText = question.theme || `Исследование реакций и ценностей`;
+        el('question-text').innerText = question.text;
+        el('back-btn').classList.toggle('invisible', currentQuestionIndex === 0);
+        el('finish-btn').classList.toggle('hidden', answeredCount() < 27);
+    }
+
+    function handleAnswer(score) {
+        const q = activeQuestions[currentQuestionIndex];
+        answers[currentQuestionIndex] = { questionId: q.id, type: q.type, subtype: q.subtype, score: score };
+        if (currentQuestionIndex < activeQuestions.length - 1) {
+            currentQuestionIndex++;
+            saveState();
+            showQuestion();
+        } else {
+            finishTest();
+        }
+    }
+
+    function prevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            saveState();
+            showQuestion();
+        }
+    }
+
+    function finishTest() {
+        saveState(true);
+        calculateAndShowResults();
+    }
+
+    function calculateAndShowResults() {
+        const typeScores = {}, typeMaxPossible = {}, subtypeScores = {}, subtypeMaxPossible = {};
+
+        for (let t = 1; t <= 9; t++) {
+            typeScores[t] = 0;
+            typeMaxPossible[t] = 0;
+            subtypeScores[t] = { sp: 0, so: 0, sx: 0 };
+            subtypeMaxPossible[t] = { sp: 0, so: 0, sx: 0 };
+        }
+
+        answers.forEach(ans => {
+            typeScores[ans.type] += ans.score;
+            typeMaxPossible[ans.type] += 4;
+            if (ans.subtype !== 'core') {
+                subtypeScores[ans.type][ans.subtype] += ans.score;
+                subtypeMaxPossible[ans.type][ans.subtype] += 4;
+            }
+        });
+
+        const typeResults = [];
+        for (let t = 1; t <= 9; t++) {
+            const totalTypeScore = typeScores[t];
+            const maxTypeScore = typeMaxPossible[t] || 1;
+            const totalTypePct = Math.round((totalTypeScore / maxTypeScore) * 100);
+
+            const spScore = subtypeScores[t].sp;
+            const soScore = subtypeScores[t].so;
+            const sxScore = subtypeScores[t].sx;
+            const sumSubtypeScore = spScore + soScore + sxScore;
+
+            let spShare = 33, soShare = 33, sxShare = 34;
+            if (sumSubtypeScore > 0) {
+                spShare = Math.round((spScore / sumSubtypeScore) * 100);
+                soShare = Math.round((soScore / sumSubtypeScore) * 100);
+                sxShare = 100 - spShare - soShare;
+            }
+
+            const spMatch = Math.round((spScore / (subtypeMaxPossible[t].sp || 1)) * 100);
+            const soMatch = Math.round((soScore / (subtypeMaxPossible[t].so || 1)) * 100);
+            const sxMatch = Math.round((sxScore / (subtypeMaxPossible[t].sx || 1)) * 100);
+
+            typeResults.push({
+                type: t, score: totalTypeScore, percentage: totalTypePct, data: enneatypesData[t],
+                subtypes: {
+                    sp: { score: spScore, sharePct: spShare, matchPct: spMatch },
+                    so: { score: soScore, sharePct: soShare, matchPct: soMatch },
+                    sx: { score: sxScore, sharePct: sxShare, matchPct: sxMatch }
+                }
+            });
+        }
+
+        const sortedResults = [...typeResults].sort((a, b) => b.percentage - a.percentage);
+
+        // Верхние сводные полосы
+        const barsContainer = document.getElementById('types-bars-container');
+        barsContainer.innerHTML = '';
+
+        sortedResults.forEach((res, index) => {
+            const isWinner = index === 0;
+
+            const subKeys = ['sp', 'so', 'sx'];
+            let topSub = 'sp';
+            subKeys.forEach(k => { if (res.subtypes[k].sharePct > res.subtypes[topSub].sharePct) topSub = k; });
+
+            const rowHtml = `
+                <div class="result-row ${isWinner ? 'winner' : ''}">
+                    <div class="result-top">
+                        <span class="result-label ${isWinner ? 'winner-label' : ''}">${res.data.name}${isWinner ? ' 🏆 (ведущий тип)' : ''}</span>
+                        <span class="result-pct">${res.percentage}%</span>
+                    </div>
+                    <div class="result-track"><div class="result-fill ${isWinner ? 'winner-fill' : ''}" style="width:${res.percentage}%"></div></div>
+                    <div class="result-sub">
+                        <span>Преобладающий инстинкт: <b style="color:var(--brass);">${topSub}${res.type} (${res.subtypes[topSub].sharePct}% доли)</b></span>
+                        <button onclick="openAccordionAndScroll(${res.type})" class="link">Разбор % sp / so / sx ↓</button>
+                    </div>
+                </div>
+            `;
+            barsContainer.insertAdjacentHTML('beforeend', rowHtml);
+        });
+
+        // Подробные аккордеоны
+        const descContainer = document.getElementById('descriptions-container');
+        descContainer.innerHTML = '';
+
+        typeResults.forEach(res => {
+            const typeData = res.data, id = res.type, inst = typeData.instincts, subs = res.subtypes;
+
+            const subtypeCard = (key, label) => `
+                <div class="subtype-card ${inst[key].isCountertype ? 'counter' : ''}">
+                    <div class="subtype-top">
+                        <span class="subtype-code">${inst[key].code}</span>
+                        <span class="subtype-share">${subs[key].sharePct}% доли</span>
+                    </div>
+                    ${inst[key].isCountertype ? '<span class="counter-flag">⚡ Контр-тип</span>' : ''}
+                    <div class="subtype-name">${inst[key].name} — «${inst[key].title}»</div>
+                    <p class="subtype-desc">${inst[key].desc}</p>
+                </div>
+            `;
+
+            const accordionHtml = `
+                <div id="accordion-card-${id}" class="accordion">
+                    <button onclick="toggleAccordion(${id})" class="accordion-header">
+                        <div class="acc-title">
+                            <span class="name">${typeData.name} <span class="pct">${res.percentage}%</span></span>
+                            <span class="subtitle">${typeData.title}</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div class="acc-mini">
+                                <span>sp <b>${subs.sp.sharePct}%</b></span><span>so <b>${subs.so.sharePct}%</b></span><span>sx <b>${subs.sx.sharePct}%</b></span>
+                            </div>
+                            <span id="arrow-${id}" class="acc-arrow">▾</span>
+                        </div>
+                    </button>
+
+                    <div id="content-${id}" class="accordion-body hidden">
+                        <div class="breakdown-box">
+                            <div class="breakdown-head"><span>📊 Распределение инстинктов у этого типа</span><span class="note">сумма внутри типа = 100%</span></div>
+                            <div class="breakdown-grid">
+                                <div class="breakdown-cell"><div class="lbl">sp${id} · самосохр.</div><div class="val">${subs.sp.sharePct}%</div><div class="match">совпадение ${subs.sp.matchPct}%</div></div>
+                                <div class="breakdown-cell"><div class="lbl">so${id} · социальный</div><div class="val">${subs.so.sharePct}%</div><div class="match">совпадение ${subs.so.matchPct}%</div></div>
+                                <div class="breakdown-cell"><div class="lbl">sx${id} · интимный</div><div class="val">${subs.sx.sharePct}%</div><div class="match">совпадение ${subs.sx.matchPct}%</div></div>
+                            </div>
+                            <div class="segbar">
+                                <div class="seg-sp" style="width:${subs.sp.sharePct}%"></div>
+                                <div class="seg-so" style="width:${subs.so.sharePct}%"></div>
+                                <div class="seg-sx" style="width:${subs.sx.sharePct}%"></div>
+                            </div>
+                            <div class="seglegend">
+                                <span><span class="dot" style="background:var(--sp);"></span>sp (${subs.sp.sharePct}%)</span>
+                                <span><span class="dot" style="background:var(--so);"></span>so (${subs.so.sharePct}%)</span>
+                                <span><span class="dot" style="background:var(--sx);"></span>sx (${subs.sx.sharePct}%)</span>
+                            </div>
+                        </div>
+
+                        <div class="basics-list">
+                            <p><b>Базовый страх:</b> ${typeData.fear}</p>
+                            <p><b>Базовое желание:</b> ${typeData.desire}</p>
+                            <p><b>Ключевая мотивация:</b> ${typeData.motivation}</p>
+                        </div>
+
+                        <h5 style="font-family:var(--font-ui); font-size:13px; font-weight:700; color:var(--text); margin-bottom:12px;">Детальный разбор трёх инстинктивных подтипов</h5>
+                        <div class="subtype-cards">
+                            ${subtypeCard('sp')}
+                            ${subtypeCard('so')}
+                            ${subtypeCard('sx')}
+                        </div>
+
+                        <div class="note-box" style="margin-top:18px;">
+                            <p class="label">💡 Как действует контр-тип этого типа</p>
+                            <p class="body">${typeData.notes}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            descContainer.insertAdjacentHTML('beforeend', accordionHtml);
+        });
+
+        document.getElementById('test-screen').classList.add('hidden');
+        document.getElementById('results-screen').classList.remove('hidden');
+        document.getElementById('results-screen').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function toggleAccordion(id) {
+        const content = document.getElementById(`content-${id}`);
+        const arrow = document.getElementById(`arrow-${id}`);
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            arrow.classList.add('open');
+        } else {
+            content.classList.add('hidden');
+            arrow.classList.remove('open');
+        }
+    }
+
+    function openAccordionAndScroll(id) {
+        const content = document.getElementById(`content-${id}`);
+        const arrow = document.getElementById(`arrow-${id}`);
+        const card = document.getElementById(`accordion-card-${id}`);
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            arrow.classList.add('open');
+        }
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function restartTest() {
+        clearState(); renderResume();
+        document.getElementById('results-screen').classList.add('hidden');
+        document.getElementById('start-screen').classList.remove('hidden');
+        document.getElementById('test').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Автовосстановление при открытии страницы
+    (function () {
+        const s = loadState();
+        if (s && restoreState(s)) { s.done ? showSavedResults() : openTest(); }
+        else renderResume();
+    })();
+</script>
+
+</body>
+</html>
